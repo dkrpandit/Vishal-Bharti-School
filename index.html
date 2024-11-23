@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishal Bharti Senior Secondary School</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: #5F0B35;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-indicator::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links li:hover .dropdown-indicator::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+            top: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: #5F0B35;
+            color: white;
+        }
+
+        .nav-links li:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section with Slider */
+        .hero {
+            margin-top: 70px;
+            position: relative;
+            height: 600px; 
+            overflow: hidden;
+            max-width: 1200px; 
+            margin-left: auto; 
+            margin-right: auto;
+        }
+
+        .slider {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
+        }
+
+        .slider-nav button {
+            background: rgba(95, 11, 53, 0.7);
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .slider-nav button:hover {
+            background: rgba(95, 11, 53, 0.9);
+        }
+
+        /* Marquee */
+        .marquee {
+            background: #f44336;
+            color: white;
+            padding: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .marquee span {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Content Section */
+        .content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .content h1 {
+            color: #5F0B35;
+            margin-bottom: 2rem;
+        }
+
+        .content p {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            background: #5F0B35;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content h2 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-content p {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#"><strong>Home</strong></a></li>
+            <li>
+                <a href="#" class="dropdown-indicator">About Us</a>
+                <div class="dropdown-content">
+                    <a href="#">School History</a>
+                    <a href="#">Mission & Vision</a>
+                    <a href="#">Principal's Message</a>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="dropdown-indicator">Infrastructure</a>
+                <div class="dropdown-content">
+                    <a href="#">Classrooms</a>
+                    <a href="#">Labs</a>
+                    <a href="#">Library</a>
+                    <a href="#">Sports Facilities</a>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="dropdown-indicator">ADMISSION</a>
+                <div class="dropdown-content">
+                    <a href="#">Admission Process</a>
+                    <a href="#">Fee Structure</a>
+                    <a href="#">Apply Online</a>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="dropdown-indicator">ACADEMICS</a>
+                <div class="dropdown-content">
+                    <a href="#">Curriculum</a>
+                    <a href="#">Faculty</a>
+                    <a href="#">Results</a>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="dropdown-indicator">Activities</a>
+                <div class="dropdown-content">
+                    <a href="#">Sports</a>
+                    <a href="#">Cultural</a>
+                    <a href="#">Clubs</a>
+                </div>
+            </li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section with Slider -->
+    <section class="hero">
+        <div class="slider">
+            <div class="slide active">
+                <img src="img/school1.webp" alt="School Image 1">
+            </div>
+            <div class="slide">
+                <img src="img/school2.webp" alt="School Image 2">
+            </div>
+            <div class="slide">
+                <img src="img/school3.webp" alt="School Image 3">
+            </div>
+            <div class="slider-nav">
+                <button onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+        <span>Admissions Open for Academic Year 2024-25 - Apply Now!</span>
+    </div>
+
+    <!-- Content -->
+    <section class="content">
+        <h1>Discover Vishal Bharti Senior Secondary School's Unique Approach to Learning</h1>
+        <p>At Vishal Bharti Senior Secondary School, we believe that every student has the potential to excel academically and personally. That's why we've developed a unique approach to learning that focuses on each student's individual needs and learning style. Our teachers are dedicated to fostering a supportive and inclusive learning environment, where students are encouraged to explore new ideas and take risks. We offer a wide range of academic and extracurricular programmes that enable our students to build a strong foundation for success.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h2>Vishal Bharti Senior Secondary School</h2>
+            <p>Parwana Road, Pundrik Vihar, Pitam Pura, New Delhi, Delhi, India</p>
+            <p>9354937851/54</p>
+            <p>Copyright © 2024 Vishal Bharti Senior Secondary School - All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Image Slider functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+            resetInterval();
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+            resetInterval();
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 3000);
+        }
+
+        // Start automatic slideshow
+        resetInterval();
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Auto-update copyright year
+        document.querySelector('.footer-content p:last-child').innerHTML = 
+            `Copyright © ${new Date().getFullYear()} Vishal Bharti Senior Secondary School - All Rights Reserved.`;
+    </script>
+</body>
+</html>
